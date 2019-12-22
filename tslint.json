@@ -1,0 +1,15 @@
+{
+  "extends": [
+    "tslint:recommended",
+    "tslint-config-prettier",
+    "tslint-plugin-prettier"
+  ],
+  "rules": {
+    "prettier": true,
+    "max-line-length": [true, 120],
+    "no-any": true,
+    "member-access": false,
+    "curly": true,
+    "quotemark": [true, "single"]
+  }
+}

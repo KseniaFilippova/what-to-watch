@@ -1,0 +1,18 @@
+{
+  "presets": [
+    "@babel/react",
+    [
+      "@babel/env",
+      {
+        "targets": [
+          "last 5 chrome versions",
+          "last 5 firefox versions",
+          "last 3 edge versions"
+        ],
+        "corejs": 3,
+        "useBuiltIns": "usage",
+        "debug": true
+      }
+    ]
+  ]
+}
