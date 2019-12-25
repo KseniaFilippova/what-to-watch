@@ -8,7 +8,6 @@
     "prettier": true,
     "max-line-length": [true, 120],
     "no-any": true,
-    "member-access": false,
     "curly": true,
     "quotemark": [true, "single", "jsx-single"],
     "arrow-parens": true,
