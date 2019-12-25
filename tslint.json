@@ -10,6 +10,8 @@
     "no-any": true,
     "member-access": false,
     "curly": true,
-    "quotemark": [true, "single"]
+    "quotemark": [true, "single", "jsx-single"],
+    "arrow-parens": true,
+    "interface-name": false
   }
 }
