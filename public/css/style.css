@@ -522,7 +522,7 @@ main {
 .catalog__genres-link {
   display: block;
   color: #DFCF77;
-  text-decoration: none;
+  cursor: pointer;
   position: relative;
   padding-bottom: 15px;
   -webkit-transition: font-weight;
@@ -839,7 +839,7 @@ main {
 .movie-nav__link {
   display: block;
   color: #EEE5B5;
-  text-decoration: none;
+  cursor: pointer;
   position: relative;
   padding-bottom: 19px; }
   .movie-nav__link::after {

@@ -3,35 +3,45 @@ import React from 'react';
 interface Props {
   items: string[];
   type: 'genres' | 'movie-navigation';
+  activeTab: string;
+  onTabClick?: (tabName: string) => void;
 }
 
 const Preview = (props: Props) => {
-  const { items, type } = props;
+  const { items, type, activeTab, onTabClick } = props;
 
   let listClassname: string;
   let itemClassname: string;
-  let linkClassname: string;
+  let itemWrapperClassname: string;
+  let itemActiveClassname: string;
 
   switch (type) {
     case 'genres':
       listClassname = 'catalog__genres-list';
       itemClassname = 'catalog__genres-item';
-      linkClassname = 'catalog__genres-link';
+      itemWrapperClassname = 'catalog__genres-link';
+      itemActiveClassname = 'catalog__genres-item catalog__genres-item--active';
       break;
     case 'movie-navigation':
       listClassname = 'movie-nav__list';
       itemClassname = 'movie-nav__item';
-      linkClassname = 'movie-nav__link';
+      itemWrapperClassname = 'movie-nav__link';
+      itemActiveClassname = 'movie-nav__item movie-nav__item--active';
   }
 
   return (
     <ul className={listClassname}>
       {items.map((item) => {
+        const isActive = item === activeTab;
         return (
-          <li className={itemClassname} key={item}>
-            <a href='#' className={linkClassname}>
-              {item}
-            </a>
+          <li
+            className={isActive ? itemActiveClassname : itemClassname}
+            key={item}
+            onClick={() => {
+              onTabClick(item);
+            }}
+          >
+            <span className={itemWrapperClassname}>{item}</span>
           </li>
         );
       })}

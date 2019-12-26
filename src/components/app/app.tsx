@@ -1,4 +1,5 @@
-import React, { Fragment } from 'react';
+import React from 'react';
+import { Route, Switch } from 'react-router-dom';
 
 import MainPage from '../../pages/main-page';
 import MoviePage from '../../pages/movie-page';
@@ -8,9 +9,19 @@ import UserListPage from '../../pages/user-list-page';
 
 const App = () => {
   return (
-    <Fragment>
-      <MainPage />
-    </Fragment>
+    <Switch>
+      <Route path='/' component={MainPage} exact />
+      <Route
+        path='/:id'
+        render={({ match }) => {
+          const { id } = match.params;
+          return <MoviePage id={id} />;
+        }}
+      />
+      <Route path='/player' component={PlayerPage} />
+      <Route path='/sign-in' component={SignInPage} />
+      <Route path='/my-list' component={UserListPage} />
+    </Switch>
   );
 };
 

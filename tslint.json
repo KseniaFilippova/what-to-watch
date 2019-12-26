@@ -11,6 +11,7 @@
     "curly": true,
     "quotemark": [true, "single", "jsx-single"],
     "arrow-parens": true,
-    "interface-name": false
+    "interface-name": false,
+    "object-literal-sort-keys": false
   }
 }

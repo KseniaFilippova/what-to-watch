@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Preview from '../card-preview/card-preview';
 import TabsList from '../tabs-list/tabs-list';
@@ -16,6 +16,19 @@ const GENRES = [
   'Thrillers',
 ];
 
+type Tab =
+  | 'All genres'
+  | 'Comedies'
+  | 'Crime'
+  | 'Documentary'
+  | 'Dramas'
+  | 'Horror'
+  | 'Kids & Family'
+  | 'Romance'
+  | 'Sci-Fi'
+  | 'Thrillers';
+type SetActiveTab = (name: string) => void;
+
 interface Props {
   page: 'main' | 'movie' | 'user-list';
   isMoreButton?: boolean;
@@ -24,12 +37,21 @@ interface Props {
 const CardsPreviewsList = (props: Props) => {
   const { page, isMoreButton } = props;
 
+  const [activeTab, setActiveTab] = useState<Tab>('All genres');
+
   const sectionClassname =
     page === 'movie' ? 'catalog catalog--like-this' : 'catalog';
 
   return (
     <section className={sectionClassname}>
-      {page === 'main' && <TabsList items={GENRES} type='genres' />}
+      {page === 'main' && (
+        <TabsList
+          items={GENRES}
+          type='genres'
+          activeTab={activeTab as string}
+          onTabClick={setActiveTab as SetActiveTab}
+        />
+      )}
 
       {page === 'movie' && <h2 className='catalog__title'>More like this</h2>}
 

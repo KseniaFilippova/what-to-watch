@@ -4,12 +4,14 @@ module.exports = {
   entry: './src/index.tsx',
   output: {
     filename: 'bundle.js',
-    path: path.join(__dirname, 'public')
+    path: path.join(__dirname, 'public'),
+    publicPath: '/',
   },
   devServer: {
     contentBase: path.join(__dirname, 'public'),
     compress: false,
     port: 3000,
+    historyApiFallback: true,
   },
   module: {
     rules: [
