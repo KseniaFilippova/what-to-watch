@@ -1,40 +1,48 @@
 import React, { Fragment } from 'react';
 
-const MovieOverview = () => {
+import formatRating from '../../utils/format-rating';
+import getMovieRatingLevel from '../../utils/get-movie-rating-level';
+
+const ACTORS_TO_SHOW_COUNT = 4;
+
+interface Props {
+  rating: number;
+  scoresCount: number;
+  description: string;
+  director: string;
+  starring: string[];
+}
+
+const MovieOverview = (props: Props) => {
+  const { rating, scoresCount, description, director, starring } = props;
+
+  const actorsToShow = starring.slice(0, ACTORS_TO_SHOW_COUNT);
+
   return (
     <Fragment>
       <div className='movie-rating'>
-        <div className='movie-rating__score'>8,9</div>
+        <div className='movie-rating__score'>{formatRating(rating)}</div>
         <p className='movie-rating__meta'>
-          <span className='movie-rating__level'>Very good</span>
-          <span className='movie-rating__count'>240 ratings</span>
+          <span className='movie-rating__level'>
+            {getMovieRatingLevel(rating)}
+          </span>
+          <span className='movie-rating__count'>{`${scoresCount} rating${
+            scoresCount === 1 ? '' : 's'
+          }`}</span>
         </p>
       </div>
 
       <div className='movie-card__text'>
-        <p>
-          In the 1930s, the Grand Budapest Hotel is a popular European ski
-          resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a
-          junior lobby boy, becomes Gustave's friend and protege.
-        </p>
-
-        <p>
-          Gustave prides himself on providing first-className service to the
-          hotel's guests, including satisfying the sexual needs of the many
-          elderly women who stay there. When one of Gustave's lovers dies
-          mysteriously, Gustave finds himself the recipient of a priceless
-          painting and the chief suspect in her murder.
-        </p>
+        <p>{description}</p>
 
         <p className='movie-card__director'>
-          <strong>Director: Wes Andreson</strong>
+          <strong>{`Director: ${director}`}</strong>
         </p>
 
         <p className='movie-card__starring'>
-          <strong>
-            Starring: Bill Murray, Edward Norton, Jude Law, Willem Dafoe and
-            other
-          </strong>
+          <strong>{`Starring: ${actorsToShow.join(', ')} ${
+            starring > actorsToShow ? 'and other' : ''
+          }`}</strong>
         </p>
       </div>
     </Fragment>

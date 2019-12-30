@@ -1,24 +1,34 @@
 import React from 'react';
 
-const MovieReview = () => {
+import formatDate from '../../utils/format-date';
+import formatRating from '../../utils/format-rating';
+
+import Review from '../../models/review';
+
+interface Props {
+  review: Review;
+}
+
+const MovieReview = (props: Props) => {
+  const { comment, user, date, rating, id } = props.review;
+
   return (
-    <div className='review'>
+    <div className='review' key={`review-${id}`}>
       <blockquote className='review__quote'>
-        <p className='review__text'>
-          Discerning travellers and Wes Anderson fans will luxuriate in the
-          glorious Mittel-European kitsch of one of the director's funniest and
-          most exquisitely designed movies in years.
-        </p>
+        <p className='review__text'>{comment}</p>
 
         <footer className='review__details'>
-          <cite className='review__author'>Kate Muir</cite>
-          <time className='review__date' dateTime='2016-12-24'>
-            December 24, 2016
+          <cite className='review__author'>{user.name}</cite>
+          <time
+            className='review__date'
+            dateTime={formatDate(date, `YYYY-MM-DD`)}
+          >
+            {formatDate(date, `MMMM DD, YYYY`)}
           </time>
         </footer>
       </blockquote>
 
-      <div className='review__rating'>8,9</div>
+      <div className='review__rating'>{formatRating(rating)}</div>
     </div>
   );
 };

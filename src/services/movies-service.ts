@@ -1,7 +1,7 @@
 export default class MoviesService {
   private readonly apiBase = 'https://htmlacademy-react-2.appspot.com/wtw';
 
-  public getMovies() {
+  public async getMovies() {
     return this.getResource('/films');
   }
 

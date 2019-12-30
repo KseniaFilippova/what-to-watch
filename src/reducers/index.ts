@@ -1,5 +1,8 @@
+import Movie from '../models/movie';
+
 interface State {
-  movies: any[];
+  movies: Map<number, Movie>;
+  randomMovie: Movie;
 }
 
 interface Action {
@@ -8,18 +11,26 @@ interface Action {
 }
 
 const initialState: State = {
-  movies: [],
+  movies: null,
+  randomMovie: null,
 };
 
-const reducer = (state = initialState, action: Action) => {
+const reducer = (state = initialState, action: Action): State => {
   switch (action.type) {
     case 'MOVIES_LOADED':
       return {
-        books: action.payload,
+        ...state,
+        movies: action.payload,
+      };
+    case 'SWITCH_RANDOM_MOVIE':
+      return {
+        ...state,
+        randomMovie: action.payload,
       };
     default:
       return state;
   }
 };
 
+export { State };
 export default reducer;

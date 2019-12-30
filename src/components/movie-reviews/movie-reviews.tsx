@@ -1,15 +1,31 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import MovieReview from '../movie-review/movie-review';
 
-const MovieReviews = () => {
+import { MoviesServiceContext } from '../../movies-service-context';
+
+import Review from '../../models/review';
+
+interface Props {
+  id: number;
+}
+
+const MovieReviews = (props: Props) => {
+  const { id } = props;
+  const [reviews, setReviews] = useState<Review[]>([]);
+
+  const moviesService = useContext(MoviesServiceContext);
+  useEffect(() => {
+    moviesService.getReviews(id).then((reviews: Review[]) => {
+      setReviews(reviews);
+    });
+  }, []);
+
   return (
-    <div className='movie-card__reviews movie-card__row'>
-      <div className='movie-card__reviews-col'>
-        <MovieReview />
-        <MovieReview />
-        <MovieReview />
-      </div>
+    <div className='movie-card__reviews'>
+      {reviews.map((review) => {
+        return <MovieReview review={review} />;
+      })}
     </div>
   );
 };

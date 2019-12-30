@@ -1,12 +1,19 @@
 import React, { Fragment } from 'react';
 
-const CardDescription = () => {
+interface Props {
+  name: string;
+  genre: string;
+  year: number;
+}
+
+const CardDescription = (props: Props) => {
+  const { name, genre, year } = props;
   return (
     <Fragment>
-      <h2 className='movie-card__title'>The Grand Budapest Hotel</h2>
+      <h2 className='movie-card__title'>{name}</h2>
       <p className='movie-card__meta'>
-        <span className='movie-card__genre'>Drama</span>
-        <span className='movie-card__year'>2014</span>
+        <span className='movie-card__genre'>{genre}</span>
+        <span className='movie-card__year'>{year}</span>
       </p>
     </Fragment>
   );

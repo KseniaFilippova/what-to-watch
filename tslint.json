@@ -12,6 +12,8 @@
     "quotemark": [true, "single", "jsx-single"],
     "arrow-parens": true,
     "interface-name": false,
-    "object-literal-sort-keys": false
+    "object-literal-sort-keys": false,
+    "no-shadowed-variable": false,
+    "radix": false
   }
 }

@@ -1,12 +1,16 @@
 import React from 'react';
 
-const CardBackground = () => {
+interface Props {
+  src: string;
+  name: string;
+}
+
+const CardBackground = (props: Props) => {
+  const { src, name } = props;
+
   return (
     <div className='movie-card__bg'>
-      <img
-        src='img/bg-the-grand-budapest-hotel.jpg'
-        alt='The Grand Budapest Hotel'
-      />
+      <img src={src} alt={name} />
     </div>
   );
 };

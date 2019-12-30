@@ -633,8 +633,7 @@ main {
   position: relative;
   z-index: 1;
   color: #EEE5B5;
-  padding-bottom: 78px;
-  background: #E1B0B2; }
+  padding-bottom: 78px; }
   .movie-card--full {
     padding-bottom: 45px;
     min-height: 100vh; }
@@ -1112,7 +1111,7 @@ main {
     transition: color 0.2s; }
 
 .review {
-  border-bottom: 2px solid #E8C3C4;
+  border-bottom: 2px solid #866866;
   font-size: 17px;
   color: #252525;
   line-height: 24px;
@@ -1278,7 +1277,8 @@ main {
   -webkit-transition: 0.2s -webkit-transform;
   transition: 0.2s -webkit-transform;
   transition: 0.2s transform;
-  transition: 0.2s transform, 0.2s -webkit-transform; }
+  transition: 0.2s transform, 0.2s -webkit-transform;
+  cursor: pointer; }
   .small-movie-card:hover {
     z-index: 3;
     -webkit-transform: scale(1.2);
