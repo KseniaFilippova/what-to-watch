@@ -1,29 +1,38 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 
 import AppFooter from '../components/app-footer/app-footer';
 import Card from '../components/card/card';
 import CardsPreviewsList from '../components/cards-previews-list/cards-previews-list';
+import TabsList from '../components/tabs-list/tabs-list';
 
-import Movie from '../models/movie';
-import { State } from '../reducers';
+import { State } from '../reducers/data-reducer/data-reducer';
+import { getGenres } from '../reducers/data-reducer/selectors';
+
+type SetActiveTab = (name: string) => void;
 
 interface Props {
-  movies: Map<number, Movie>;
+  genres: string[];
 }
 
 const MainPage = (props: Props) => {
-  const { movies } = props;
-
-  if (movies === null) {
-    return null;
-  }
+  const { genres } = props;
+  const [activeTab, setActiveTab] = useState('All genres');
 
   return (
     <Fragment>
-      <Card movie={movies.get(1)} />
+      <Card />
       <div className='page-content'>
-        <CardsPreviewsList page='main' />
+        <section className='catalog'>
+          <TabsList
+            items={genres}
+            type='genres'
+            activeTab={activeTab}
+            onTabClick={setActiveTab as SetActiveTab}
+          />
+
+          <CardsPreviewsList isFilteredByGenre={true} genre={activeTab} />
+        </section>
         <AppFooter />
       </div>
     </Fragment>
@@ -32,7 +41,7 @@ const MainPage = (props: Props) => {
 
 const mapStateToProps = (state: State) => {
   return {
-    movies: state.movies,
+    genres: getGenres(state),
   };
 };
 

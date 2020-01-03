@@ -6,34 +6,39 @@ import CardsPreviewsList from '../components/cards-previews-list/cards-previews-
 import FullCard from '../components/full-card/full-card';
 
 import Movie from '../models/movie';
-import { State } from '../reducers';
+import { State } from '../reducers/data-reducer/data-reducer';
+import { getMovieById } from '../reducers/data-reducer/selectors';
 
 interface Props {
   id: string;
-  movies: Map<number, Movie>;
+  movie: Movie;
 }
 
 const MoviePage = (props: Props) => {
-  const { id, movies } = props;
+  const { movie } = props;
 
-  if (movies === null) {
+  if (!movie) {
     return null;
   }
 
   return (
     <Fragment>
-      <FullCard movie={movies.get(parseInt(id))} />
+      <FullCard movie={movie} />
       <div className='page-content'>
-        <CardsPreviewsList page='movie' />
+        <section className='catalog catalog--like-this'>
+          <h2 className='catalog__title'>More like this</h2>
+
+          <CardsPreviewsList isFilteredByRelated={true} relatedMovie={movie} />
+        </section>
         <AppFooter />
       </div>
     </Fragment>
   );
 };
 
-const mapStateToProps = (state: State) => {
+const mapStateToProps = (state: State, ownProps: { id: string }) => {
   return {
-    movies: state.movies,
+    movie: getMovieById(state, parseInt(ownProps.id)),
   };
 };
 

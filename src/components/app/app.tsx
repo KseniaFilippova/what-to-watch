@@ -8,7 +8,7 @@ import PlayerPage from '../../pages/player-page';
 import SignInPage from '../../pages/sign-in-page';
 import UserListPage from '../../pages/user-list-page';
 
-import { moviesLoaded } from '../../actions';
+import { moviesLoaded } from '../../actions/data-actions';
 import { MoviesServiceContext } from '../../movies-service-context';
 
 import Movie from '../../models/movie';
@@ -19,7 +19,7 @@ interface Props {
     movies: MovieFromServer[],
   ) => {
     type: 'MOVIES_LOADED';
-    payload: Map<number, Movie>;
+    payload: Movie[];
   };
 }
 
@@ -40,7 +40,7 @@ const App = (props: Props) => {
         path='/movie-:id'
         render={({ match }) => {
           const { id } = match.params;
-          return <MoviePage id={id} key={`movie-page-${id}`} />;
+          return <MoviePage id={id} />;
         }}
       />
       <Route path='/player' component={PlayerPage} />

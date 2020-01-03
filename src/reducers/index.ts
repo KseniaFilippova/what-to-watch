@@ -1,36 +1,9 @@
-import Movie from '../models/movie';
+import { combineReducers } from 'redux';
 
-interface State {
-  movies: Map<number, Movie>;
-  randomMovie: Movie;
-}
+import dataReducer from './data-reducer/data-reducer';
+import userReducer from './user-reducer/user-reducer';
 
-interface Action {
-  type: string;
-  payload?: any;
-}
-
-const initialState: State = {
-  movies: null,
-  randomMovie: null,
-};
-
-const reducer = (state = initialState, action: Action): State => {
-  switch (action.type) {
-    case 'MOVIES_LOADED':
-      return {
-        ...state,
-        movies: action.payload,
-      };
-    case 'SWITCH_RANDOM_MOVIE':
-      return {
-        ...state,
-        randomMovie: action.payload,
-      };
-    default:
-      return state;
-  }
-};
-
-export { State };
-export default reducer;
+export default combineReducers({
+  dataReducer,
+  userReducer,
+});

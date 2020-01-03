@@ -1,7 +1,7 @@
 import React from 'react';
-import MoviesService from './services/movies-service';
+import MoviesApi from './api/movies-api';
 
-const moviesService = new MoviesService();
+const moviesService = new MoviesApi();
 const MoviesServiceContext = React.createContext(moviesService);
 
 export { moviesService, MoviesServiceContext };

@@ -2,7 +2,7 @@ import axios, { AxiosError, AxiosInstance, AxiosResponse, Method } from 'axios';
 
 import history from '../history';
 
-export default class MoviesService {
+export default abstract class API {
   private readonly api: AxiosInstance;
   private readonly API_TIMEOUT = 5000;
   private readonly API_BASE = 'https://htmlacademy-react-2.appspot.com/wtw';
@@ -29,24 +29,12 @@ export default class MoviesService {
     this.api.interceptors.response.use(onSuccess, onError);
   }
 
-  public async getMovies() {
-    return this.makeRequest('/films');
-  }
-
-  public getReviews(movieId: number) {
-    return this.makeRequest(`/comments/${movieId}`);
-  }
-
-  public getFavouriteMovies() {
-    return this.makeRequest('/favorite');
-  }
-
-  public setFavouriteStatus(movieId: number, status: 0 | 1) {
-    return this.makeRequest(`/favorite/${movieId}/${status}`, 'post');
-  }
-
-  private async makeRequest(url: string, method: Method = 'get') {
-    const response = await this.api(url, { method });
+  protected async makeRequest(url: string, method: Method = 'get', data?: any) {
+    const config: { method: Method; data?: any } = { method };
+    if (data) {
+      config.data = data;
+    }
+    const response = await this.api(url, config);
 
     if (response && response.status === 200) {
       return response.data;

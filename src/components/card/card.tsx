@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import AppHeader from '../app-header/app-header';
 import CardBackground from '../card-background/card-background';
@@ -7,16 +8,23 @@ import CardDescription from '../card-description/card-description';
 import CardPoster from '../card-poster/card-poster';
 
 import Movie from '../../models/movie';
+import { State } from '../../reducers/data-reducer/data-reducer';
+
+import { getRandomMovie } from '../../reducers/data-reducer/selectors';
 
 interface Props {
-  isInList?: boolean;
   movie: Movie;
 }
 
 const Card = (props: Props) => {
-  const { isInList, movie } = props;
+  const { movie } = props;
 
+  const isInList = false;
   const listSvgLink = isInList ? '#in-list' : '#add';
+
+  if (!movie) {
+    return null;
+  }
 
   return (
     <div className='movie-card'>
@@ -46,4 +54,10 @@ const Card = (props: Props) => {
   );
 };
 
-export default Card;
+const mapStateToProps = (state: State) => {
+  return {
+    movie: getRandomMovie(state),
+  };
+};
+
+export default connect(mapStateToProps)(Card);
