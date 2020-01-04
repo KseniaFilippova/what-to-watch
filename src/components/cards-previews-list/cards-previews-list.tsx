@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import CardPreview from '../card-preview/card-preview';
 
 import Movie from '../../models/movie';
-import { State } from '../../reducers/data-reducer/data-reducer';
+import { Store } from '../../store';
 
 import {
   getMovies,
@@ -71,7 +71,7 @@ const CardsPreviewsList = (props: Props) => {
 };
 
 const mapStateToProps = (
-  state: State,
+  state: Store,
   ownProps: {
     isFilteredByGenre?: boolean;
     genre?: string;

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 
 import MovieReview from '../movie-review/movie-review';
 
-import { MoviesServiceContext } from '../../movies-service-context';
+import { MoviesApiContext } from '../../context/movies-api-context';
 
 import Review from '../../models/review';
 
@@ -14,7 +14,7 @@ const MovieReviews = (props: Props) => {
   const { id } = props;
   const [reviews, setReviews] = useState<Review[]>([]);
 
-  const moviesService = useContext(MoviesServiceContext);
+  const moviesService = useContext(MoviesApiContext);
   useEffect(() => {
     moviesService.getReviews(id).then((reviews: Review[]) => {
       setReviews(reviews);

@@ -5,16 +5,19 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 import App from './components/app/app';
 
-import { moviesService, MoviesServiceContext } from './movies-service-context';
+import { moviesApi, MoviesApiContext } from './context/movies-api-context';
+import { userApi, UserApiContext } from './context/user-api-context';
 import store from './store';
 
 ReactDOM.render(
   <StoreProvider store={store}>
-    <MoviesServiceContext.Provider value={moviesService}>
-      <Router>
-        <App />
-      </Router>
-    </MoviesServiceContext.Provider>
+    <MoviesApiContext.Provider value={moviesApi}>
+      <UserApiContext.Provider value={userApi}>
+        <Router>
+          <App />
+        </Router>
+      </UserApiContext.Provider>
+    </MoviesApiContext.Provider>
   </StoreProvider>,
   document.querySelector('#root'),
 );

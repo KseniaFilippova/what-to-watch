@@ -8,7 +8,7 @@ import CardDescription from '../card-description/card-description';
 import CardPoster from '../card-poster/card-poster';
 
 import Movie from '../../models/movie';
-import { State } from '../../reducers/data-reducer/data-reducer';
+import { Store } from '../../store';
 
 import { getRandomMovie } from '../../reducers/data-reducer/selectors';
 
@@ -30,7 +30,7 @@ const Card = (props: Props) => {
     <div className='movie-card'>
       <CardBackground src={movie.backgroundImage} name={movie.name} />
 
-      <AppHeader isSignedIn={false} />
+      <AppHeader />
 
       <div className='movie-card__wrap'>
         <div className='movie-card__info'>
@@ -54,7 +54,7 @@ const Card = (props: Props) => {
   );
 };
 
-const mapStateToProps = (state: State) => {
+const mapStateToProps = (state: Store) => {
   return {
     movie: getRandomMovie(state),
   };

@@ -1,26 +1,19 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+
+import User from '../../models/user';
+import { getUser } from '../../reducers/user-reducer/selectors';
+import { Store } from '../../store';
 
 interface Props {
   isUserListPage?: boolean;
   isSignInPage?: boolean;
-  isSignedIn: boolean;
+  user: User;
 }
 
 const AppHeader = (props: Props) => {
-  const { isUserListPage, isSignInPage, isSignedIn } = props;
-
-  const userAvatar = (
-    <div className='user-block__avatar'>
-      <img src='img/avatar.jpg' alt='User avatar' width='63' height='63' />
-    </div>
-  );
-
-  const signInLink = (
-    <a href='sign-in.html' className='user-block__link'>
-      Sign in
-    </a>
-  );
+  const { isUserListPage, isSignInPage, user } = props;
 
   const isUserPage = isUserListPage || isSignInPage;
 
@@ -45,10 +38,33 @@ const AppHeader = (props: Props) => {
       )}
 
       {!isSignInPage && (
-        <div className='user-block'>{isSignedIn ? userAvatar : signInLink}</div>
+        <div className='user-block'>
+          {user ? (
+            <div className='user-block__avatar'>
+              <Link to='/my-list'>
+                <img
+                  src={`https://htmlacademy-react-2.appspot.com${user.avatar}`}
+                  alt='User avatar'
+                  width='63'
+                  height='63'
+                />
+              </Link>
+            </div>
+          ) : (
+            <Link to='/sign-in' className='user-block__link'>
+              Sign in
+            </Link>
+          )}
+        </div>
       )}
     </header>
   );
 };
 
-export default AppHeader;
+const mapStateToProps = (state: Store) => {
+  return {
+    user: getUser(state),
+  };
+};
+
+export default connect(mapStateToProps)(AppHeader);

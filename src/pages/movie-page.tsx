@@ -6,8 +6,8 @@ import CardsPreviewsList from '../components/cards-previews-list/cards-previews-
 import FullCard from '../components/full-card/full-card';
 
 import Movie from '../models/movie';
-import { State } from '../reducers/data-reducer/data-reducer';
 import { getMovieById } from '../reducers/data-reducer/selectors';
+import { Store } from '../store';
 
 interface Props {
   id: string;
@@ -36,7 +36,7 @@ const MoviePage = (props: Props) => {
   );
 };
 
-const mapStateToProps = (state: State, ownProps: { id: string }) => {
+const mapStateToProps = (state: Store, ownProps: { id: string }) => {
   return {
     movie: getMovieById(state, parseInt(ownProps.id)),
   };

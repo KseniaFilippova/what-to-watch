@@ -1,12 +1,68 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
+import { connect } from 'react-redux';
+import { useHistory, useLocation } from 'react-router-dom';
 
-const SignInForm = () => {
-  const isRecognised = true;
+import { UserApiContext } from '../../context/user-api-context';
+
+import { updateUser } from '../../actions/user-actions';
+
+import User from '../../models/user';
+
+interface Props {
+  updateUser: (user: User) => void;
+}
+
+const SignInForm = (props: Props) => {
+  const { updateUser } = props;
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isNotRecognised, setIsNotRecognized] = useState(false);
+
+  const history = useHistory();
+  const location = useLocation();
+
+  const userApi = useContext(UserApiContext);
+
+  const onFormSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+
+    const formData: { email: string; password: string } = {
+      email,
+      password,
+    };
+
+    userApi
+      .authorize(formData)
+      .then(
+        (res: {
+          avatar_url: string;
+          email: string;
+          id: number;
+          name: string;
+        }) => {
+          const user: User = {
+            avatar: res.avatar_url,
+            email: res.email,
+            id: res.id,
+            name: res.name,
+          };
+          updateUser(user);
+
+          if (location.key) {
+            history.goBack();
+          } else {
+            history.push('/');
+          }
+        },
+      )
+      .catch(() => setIsNotRecognized(true));
+  };
 
   return (
     <div className='sign-in user-page__content'>
-      <form action='#' className='sign-in__form'>
-        {!isRecognised && (
+      <form className='sign-in__form' onSubmit={onFormSubmit}>
+        {isNotRecognised && (
           <div className='sign-in__message'>
             <p>
               We can’t recognize this email <br /> and password combination.
@@ -18,6 +74,8 @@ const SignInForm = () => {
         <div className='sign-in__fields'>
           <div className='sign-in__field'>
             <input
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
               className='sign-in__input'
               type='email'
               placeholder='Email address'
@@ -33,6 +91,8 @@ const SignInForm = () => {
           </div>
           <div className='sign-in__field'>
             <input
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
               className='sign-in__input'
               type='password'
               placeholder='Password'
@@ -57,4 +117,8 @@ const SignInForm = () => {
   );
 };
 
-export default SignInForm;
+const mapDispatchToProps = {
+  updateUser,
+};
+
+export default connect(null, mapDispatchToProps)(SignInForm);

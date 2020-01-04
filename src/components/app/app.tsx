@@ -9,7 +9,7 @@ import SignInPage from '../../pages/sign-in-page';
 import UserListPage from '../../pages/user-list-page';
 
 import { moviesLoaded } from '../../actions/data-actions';
-import { MoviesServiceContext } from '../../movies-service-context';
+import { MoviesApiContext } from '../../context/movies-api-context';
 
 import Movie from '../../models/movie';
 import MovieFromServer from '../../models/movie-from-server';
@@ -26,9 +26,9 @@ interface Props {
 const App = (props: Props) => {
   const { moviesLoaded } = props;
 
-  const moviesService = useContext(MoviesServiceContext);
+  const moviesApi = useContext(MoviesApiContext);
   useEffect(() => {
-    moviesService.getMovies().then((movies: MovieFromServer[]) => {
+    moviesApi.getMovies().then((movies: MovieFromServer[]) => {
       moviesLoaded(movies);
     });
   }, []);

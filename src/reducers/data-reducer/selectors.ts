@@ -1,27 +1,27 @@
 import { createSelector } from 'reselect';
 
 import Movie from '../../models/movie';
-import { State } from '../../reducers/data-reducer/data-reducer';
+import { Store } from '../../store';
 
 import createRandomInteger from '../../utils/create-random-integer';
 
-const getMovies = (state: State): Movie[] => state.movies;
+const getMovies = (state: Store): Movie[] => state.data.movies;
 
-const getFavoriteMovies = (state: State): Movie[] => state.favoriteMovies;
+const getFavoriteMovies = (state: Store): Movie[] => state.data.favoriteMovies;
 
-const getMovieById = (state: State, id: number): Movie =>
-  state.movies.find((movie: Movie) => movie.id === id);
+const getMovieById = (state: Store, id: number): Movie =>
+  state.data.movies.find((movie: Movie) => movie.id === id);
 
-const getRandomMovie = (state: State): Movie =>
-  state.movies[createRandomInteger(1, state.movies.length - 1)];
+const getRandomMovie = (state: Store): Movie =>
+  state.data.movies[createRandomInteger(1, state.data.movies.length - 1)];
 
-const getMoviesByGenre = (state: State, genre: string): Movie[] =>
+const getMoviesByGenre = (state: Store, genre: string): Movie[] =>
   genre === 'All genres'
-    ? state.movies
-    : state.movies.filter((movie: Movie) => movie.genre === genre);
+    ? state.data.movies
+    : state.data.movies.filter((movie: Movie) => movie.genre === genre);
 
-const getRelatedMovies = (state: State, currentMovie: Movie) =>
-  state.movies.filter(
+const getRelatedMovies = (state: Store, currentMovie: Movie) =>
+  state.data.movies.filter(
     (movie: Movie) =>
       movie.id !== currentMovie.id && movie.genre === currentMovie.genre,
   );

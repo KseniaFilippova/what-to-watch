@@ -7,7 +7,7 @@ import SignInForm from '../components/sign-in-form/sign-in-form';
 const SignInPage = () => {
   return (
     <div className='user-page'>
-      <AppHeader isSignInPage isSignedIn={false} />
+      <AppHeader isSignInPage />
       <SignInForm />
       <AppFooter />
     </div>

@@ -4,6 +4,6 @@ import dataReducer from './data-reducer/data-reducer';
 import userReducer from './user-reducer/user-reducer';
 
 export default combineReducers({
-  dataReducer,
-  userReducer,
+  data: dataReducer,
+  user: userReducer,
 });

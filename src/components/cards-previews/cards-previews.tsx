@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import CardsPreviewsList from '../cards-previews-list/cards-previews-list';
 import TabsList from '../tabs-list/tabs-list';
 
-import { State } from '../../reducers/data-reducer/data-reducer';
 import { getGenres } from '../../reducers/data-reducer/selectors';
+import { Store } from '../../store';
 
 type SetActiveTab = (name: string) => void;
 
@@ -40,7 +40,7 @@ const CardsPreviews = (props: Props) => {
   );
 };
 
-const mapStateToProps = (state: State) => {
+const mapStateToProps = (state: Store) => {
   return {
     genres: getGenres(state),
   };

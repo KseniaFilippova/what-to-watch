@@ -6,8 +6,8 @@ import Card from '../components/card/card';
 import CardsPreviewsList from '../components/cards-previews-list/cards-previews-list';
 import TabsList from '../components/tabs-list/tabs-list';
 
-import { State } from '../reducers/data-reducer/data-reducer';
 import { getGenres } from '../reducers/data-reducer/selectors';
+import { Store } from '../store';
 
 type SetActiveTab = (name: string) => void;
 
@@ -39,7 +39,7 @@ const MainPage = (props: Props) => {
   );
 };
 
-const mapStateToProps = (state: State) => {
+const mapStateToProps = (state: Store) => {
   return {
     genres: getGenres(state),
   };

@@ -22,7 +22,7 @@ const FullCard = (props: Props) => {
     >
       <div className='movie-card__hero'>
         <CardBackground src={movie.backgroundImage} name={movie.name} />
-        <AppHeader isSignedIn={false} />
+        <AppHeader />
 
         <div className='movie-card__wrap'>
           <div className='movie-card__desc'>

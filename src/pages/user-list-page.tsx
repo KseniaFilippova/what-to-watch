@@ -7,7 +7,7 @@ import CardsPreviews from '../components/cards-previews/cards-previews';
 const UserListPage = () => {
   return (
     <div className='user-page'>
-      <AppHeader isUserListPage isSignedIn={false} />
+      <AppHeader isUserListPage />
       <CardsPreviews page='user-list' />
       <AppFooter />
     </div>
