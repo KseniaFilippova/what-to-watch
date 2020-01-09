@@ -7,6 +7,7 @@ import { UserApiContext } from '../../context/user-api-context';
 import { updateUser } from '../../actions/user-actions';
 
 import User from '../../models/user';
+import { saveUserState } from '../../store/session';
 
 interface Props {
   updateUser: (user: User) => void;
@@ -48,6 +49,7 @@ const SignInForm = (props: Props) => {
             name: res.name,
           };
           updateUser(user);
+          saveUserState(user);
 
           if (location.key) {
             history.goBack();

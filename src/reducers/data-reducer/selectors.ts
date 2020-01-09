@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 
 import Movie from '../../models/movie';
-import { Store } from '../../store';
+import { Store } from '../../store/store';
 
 import createRandomInteger from '../../utils/create-random-integer';
 

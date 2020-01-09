@@ -1,7 +1,5 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse, Method } from 'axios';
 
-import history from '../history';
-
 export default abstract class API {
   private readonly api: AxiosInstance;
   private readonly API_TIMEOUT = 5000;
@@ -21,7 +19,7 @@ export default abstract class API {
         error.response &&
         (error.response.status === 401 || error.response.status === 403)
       ) {
-        history.push(`/login`);
+        location.assign('sign-in');
       }
       return error;
     };

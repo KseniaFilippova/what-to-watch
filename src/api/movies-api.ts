@@ -13,7 +13,7 @@ export default class MoviesApi extends Api {
     return this.makeRequest(`/comments/${movieId}`);
   }
 
-  public getFavouriteMovies() {
+  public getFavoriteMovies() {
     return this.makeRequest('/favorite');
   }
 

@@ -7,7 +7,7 @@ import App from './components/app/app';
 
 import { moviesApi, MoviesApiContext } from './context/movies-api-context';
 import { userApi, UserApiContext } from './context/user-api-context';
-import store from './store';
+import store from './store/store';
 
 ReactDOM.render(
   <StoreProvider store={store}>

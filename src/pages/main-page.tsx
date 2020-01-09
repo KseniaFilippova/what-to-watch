@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 
 import AppFooter from '../components/app-footer/app-footer';
 import Card from '../components/card/card';
-import CardsPreviewsList from '../components/cards-previews-list/cards-previews-list';
+import FilteredCardsPreviewsList from '../components/filtered-cards-previews-list/filtered-cards-previews-list';
 import TabsList from '../components/tabs-list/tabs-list';
 
 import { getGenres } from '../reducers/data-reducer/selectors';
-import { Store } from '../store';
+
+import { Store } from '../store/store';
 
 type SetActiveTab = (name: string) => void;
-
 interface Props {
   genres: string[];
 }
@@ -30,8 +30,7 @@ const MainPage = (props: Props) => {
             activeTab={activeTab}
             onTabClick={setActiveTab as SetActiveTab}
           />
-
-          <CardsPreviewsList isFilteredByGenre={true} genre={activeTab} />
+          <FilteredCardsPreviewsList activeGenre={activeTab} />
         </section>
         <AppFooter />
       </div>

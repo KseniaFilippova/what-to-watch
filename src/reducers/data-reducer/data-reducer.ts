@@ -27,7 +27,7 @@ const reducer = (state = initialState, action: Action): State => {
         ...state,
         favoriteMovies: action.payload,
       };
-    case 'SET_FAVORITE_STATUS':
+    case 'UPDATE_MOVIES':
       return {
         ...state,
         movies: action.payload,

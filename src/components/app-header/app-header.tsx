@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import User from '../../models/user';
 import { getUser } from '../../reducers/user-reducer/selectors';
-import { Store } from '../../store';
+import { Store } from '../../store/store';
 
 interface Props {
   isUserListPage?: boolean;
