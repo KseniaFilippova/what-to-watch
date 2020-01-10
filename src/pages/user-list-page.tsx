@@ -7,10 +7,10 @@ import CardsPreviewsList from '../components/cards-previews-list/cards-previews-
 
 import { favoriteMoviesLoaded } from '../actions/data-actions';
 
-import { MoviesApiContext } from '../context/movies-api-context';
+import { WebAPIContext } from '../context/web-api-context';
 
 import Movie from '../models/movie';
-import MovieFromServer from '../models/movie-from-server';
+import WebApiMovie from '../models/web-api-movie';
 import { Store } from '../store/store';
 
 import { getFavoriteMovies } from '../reducers/data-reducer/selectors';
@@ -18,7 +18,7 @@ import { getFavoriteMovies } from '../reducers/data-reducer/selectors';
 interface Props {
   favoriteMovies: Movie[];
   favoriteMoviesLoaded: (
-    favoriteMovies: MovieFromServer[],
+    favoriteMovies: WebApiMovie[],
   ) => {
     type: 'FAVORITE_MOVIES_LOADED';
     payload: Movie[];
@@ -28,10 +28,10 @@ interface Props {
 const UserListPage = (props: Props) => {
   const { favoriteMovies, favoriteMoviesLoaded } = props;
 
-  const moviesApi = useContext(MoviesApiContext);
+  const webApi = useContext(WebAPIContext);
 
   useEffect(() => {
-    moviesApi.getFavoriteMovies().then((movies: MovieFromServer[]) => {
+    webApi.getFavoriteMovies().then((movies: WebApiMovie[]) => {
       favoriteMoviesLoaded(movies);
     });
   }, []);

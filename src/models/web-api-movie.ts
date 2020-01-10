@@ -1,4 +1,4 @@
-interface MovieFromServer {
+interface WebApiMovie {
   background_color: string;
   background_image: string;
   description: string;
@@ -18,4 +18,4 @@ interface MovieFromServer {
   video_link: string;
 }
 
-export default MovieFromServer;
+export default WebApiMovie;

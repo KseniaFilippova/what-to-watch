@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import AppHeader from '../app-header/app-header';
@@ -7,38 +7,61 @@ import CardButton from '../card-button/card-button';
 import CardDescription from '../card-description/card-description';
 import CardPoster from '../card-poster/card-poster';
 
-import { MoviesApiContext } from '../../context/movies-api-context';
+import { WebAPIContext } from '../../context/web-api-context';
 
 import Movie from '../../models/movie';
-import MovieFromServer from '../../models/movie-from-server';
 import User from '../../models/user';
+import WebApiMovie from '../../models/web-api-movie';
 import { Store } from '../../store/store';
 
-import { updateMovies } from '../../actions/data-actions';
-import { getRandomMovie } from '../../reducers/data-reducer/selectors';
+import {
+  promoMovieLoaded,
+  updateMovies,
+  updatePromoMovie,
+} from '../../actions/data-actions';
+import { getPromoMovie } from '../../reducers/data-reducer/selectors';
 import { getUser } from '../../reducers/user-reducer/selectors';
 
 interface Props {
-  movie: Movie;
-  updateMovies: (updatedMovie: MovieFromServer) => void;
   user: User;
+  movie: Movie;
+  updateMovies: (updatedMovie: WebApiMovie) => void;
+  updatePromoMovie: (updatedMovie: WebApiMovie) => void;
+  promoMovieLoaded: (
+    promoMovie: WebApiMovie,
+  ) => {
+    type: 'PROMO_MOVIE_LOADED';
+    payload: Movie;
+  };
 }
 
 const Card = (props: Props) => {
-  const { movie, updateMovies, user } = props;
+  const {
+    user,
+    movie,
+    updateMovies,
+    updatePromoMovie,
+    promoMovieLoaded,
+  } = props;
+  const webApi = useContext(WebAPIContext);
+
+  useEffect(() => {
+    webApi.getPromo().then((promoMovie) => {
+      promoMovieLoaded(promoMovie);
+    });
+  }, []);
+
+  const onInListButtonClick = () => {
+    const status = movie.isFavorite ? 0 : 1;
+    webApi.setFavouriteStatus(movie.id, status).then((updatedMovie) => {
+      updatePromoMovie(updatedMovie);
+      updateMovies(updatedMovie);
+    });
+  };
 
   if (!movie) {
     return null;
   }
-
-  const moviesApi = useContext(MoviesApiContext);
-
-  const onInListButtonClick = () => {
-    const status = movie.isFavorite ? 0 : 1;
-    moviesApi.setFavouriteStatus(movie.id, status).then((updatedMovie) => {
-      updateMovies(updatedMovie);
-    });
-  };
 
   return (
     <div className='movie-card'>
@@ -76,13 +99,15 @@ const Card = (props: Props) => {
 
 const mapStateToProps = (state: Store) => {
   return {
-    movie: getRandomMovie(state),
+    movie: getPromoMovie(state),
     user: getUser(state),
   };
 };
 
 const mapDispatchToProps = {
+  promoMovieLoaded,
   updateMovies,
+  updatePromoMovie,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Card);

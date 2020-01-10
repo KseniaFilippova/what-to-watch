@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { connect } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 
-import { UserApiContext } from '../../context/user-api-context';
+import { WebAPIContext } from '../../context/web-api-context';
 
 import { updateUser } from '../../actions/user-actions';
 
@@ -23,7 +23,7 @@ const SignInForm = (props: Props) => {
   const history = useHistory();
   const location = useLocation();
 
-  const userApi = useContext(UserApiContext);
+  const webApi = useContext(WebAPIContext);
 
   const onFormSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -33,7 +33,7 @@ const SignInForm = (props: Props) => {
       password,
     };
 
-    userApi
+    webApi
       .authorize(formData)
       .then(
         (res: {

@@ -9,14 +9,14 @@ import SignInPage from '../../pages/sign-in-page';
 import UserListPage from '../../pages/user-list-page';
 
 import { moviesLoaded } from '../../actions/data-actions';
-import { MoviesApiContext } from '../../context/movies-api-context';
+import { WebAPIContext } from '../../context/web-api-context';
 
 import Movie from '../../models/movie';
-import MovieFromServer from '../../models/movie-from-server';
+import WebApiMovie from '../../models/web-api-movie';
 
 interface Props {
   moviesLoaded: (
-    movies: MovieFromServer[],
+    movies: WebApiMovie[],
   ) => {
     type: 'MOVIES_LOADED';
     payload: Movie[];
@@ -26,9 +26,9 @@ interface Props {
 const App = (props: Props) => {
   const { moviesLoaded } = props;
 
-  const moviesApi = useContext(MoviesApiContext);
+  const webApi = useContext(WebAPIContext);
   useEffect(() => {
-    moviesApi.getMovies().then((movies: MovieFromServer[]) => {
+    webApi.getMovies().then((movies: WebApiMovie[]) => {
       moviesLoaded(movies);
     });
   }, []);

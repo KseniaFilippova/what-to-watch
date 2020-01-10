@@ -8,11 +8,13 @@ interface Action {
 interface State {
   movies: Movie[];
   favoriteMovies: Movie[];
+  promoMovie: Movie;
 }
 
 const initialState: State = {
   movies: [],
   favoriteMovies: [],
+  promoMovie: null,
 };
 
 const reducer = (state = initialState, action: Action): State => {
@@ -27,10 +29,20 @@ const reducer = (state = initialState, action: Action): State => {
         ...state,
         favoriteMovies: action.payload,
       };
+    case 'PROMO_MOVIE_LOADED':
+      return {
+        ...state,
+        promoMovie: action.payload,
+      };
     case 'UPDATE_MOVIES':
       return {
         ...state,
         movies: action.payload,
+      };
+    case 'UPDATE_PROMO_MOVIE':
+      return {
+        ...state,
+        promoMovie: action.payload,
       };
     default:
       return state;

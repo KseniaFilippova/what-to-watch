@@ -12,12 +12,13 @@ interface Store {
   data: {
     movies: Movie[];
     favoriteMovies: Movie[];
+    promoMovie: Movie;
   };
   user: { user: User };
 }
 
 const initialState: Store = {
-  data: { movies: [], favoriteMovies: [] },
+  data: { movies: [], favoriteMovies: [], promoMovie: null },
   user: { user: preloadedUser },
 };
 

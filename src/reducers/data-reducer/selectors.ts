@@ -9,6 +9,8 @@ const getMovies = (state: Store): Movie[] => state.data.movies;
 
 const getFavoriteMovies = (state: Store): Movie[] => state.data.favoriteMovies;
 
+const getPromoMovie = (state: Store): Movie => state.data.promoMovie;
+
 const getMovieById = (state: Store, id: number): Movie =>
   state.data.movies.find((movie: Movie) => movie.id === id);
 
@@ -38,6 +40,7 @@ const getGenres = createSelector(getMovies, (movies) => {
 export {
   getMovies,
   getFavoriteMovies,
+  getPromoMovie,
   getMovieById,
   getRandomMovie,
   getMoviesByGenre,

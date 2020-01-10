@@ -7,30 +7,30 @@ import CardButton from '../card-button/card-button';
 import CardDescription from '../card-description/card-description';
 import MovieInfo from '../movie-info/movie-info';
 
-import { MoviesApiContext } from '../../context/movies-api-context';
+import { WebAPIContext } from '../../context/web-api-context';
 
 import { updateMovies } from '../../actions/data-actions';
 import { getUser } from '../../reducers/user-reducer/selectors';
 
 import Movie from '../../models/movie';
-import MovieFromServer from '../../models/movie-from-server';
 import User from '../../models/user';
+import WebApiMovie from '../../models/web-api-movie';
 import { Store } from '../../store/store';
 
 interface Props {
   movie: Movie;
-  updateMovies: (updatedMovie: MovieFromServer) => void;
+  updateMovies: (updatedMovie: WebApiMovie) => void;
   user: User;
 }
 
 const FullCard = (props: Props) => {
   const { movie, updateMovies, user } = props;
 
-  const moviesApi = useContext(MoviesApiContext);
+  const webApi = useContext(WebAPIContext);
 
   const onInListButtonClick = () => {
     const status = movie.isFavorite ? 0 : 1;
-    moviesApi.setFavouriteStatus(movie.id, status).then((updatedMovie) => {
+    webApi.setFavouriteStatus(movie.id, status).then((updatedMovie) => {
       updateMovies(updatedMovie);
     });
   };
