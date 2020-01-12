@@ -43,7 +43,13 @@ const App = (props: Props) => {
           return <MoviePage id={id} />;
         }}
       />
-      <Route path='/player' component={PlayerPage} />
+      <Route
+        path='/play-movie-:id'
+        render={({ match }) => {
+          const { id } = match.params;
+          return <PlayerPage id={id} />;
+        }}
+      />
       <Route path='/sign-in' component={SignInPage} />
       <Route path='/my-list' component={UserListPage} />
     </Switch>

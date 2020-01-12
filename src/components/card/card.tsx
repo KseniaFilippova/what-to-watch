@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import AppHeader from '../app-header/app-header';
 import CardBackground from '../card-background/card-background';
@@ -51,6 +52,11 @@ const Card = (props: Props) => {
     });
   }, []);
 
+  const history = useHistory();
+  const onPlayButtonClick = () => {
+    history.push(`play-movie-${movie.id}`);
+  };
+
   const onInListButtonClick = () => {
     const status = movie.isFavorite ? 0 : 1;
     webApi.setFavouriteStatus(movie.id, status).then((updatedMovie) => {
@@ -81,7 +87,11 @@ const Card = (props: Props) => {
             />
 
             <div className='movie-card__buttons'>
-              <CardButton text='Play' svgLink='#play-s' />
+              <CardButton
+                text='Play'
+                svgLink='#play-s'
+                onClick={onPlayButtonClick}
+              />
               {Boolean(user) && (
                 <CardButton
                   text='My list'

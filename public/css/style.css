@@ -949,12 +949,9 @@ main {
 
 .player__exit {
   display: block;
-  position: absolute;
   z-index: 2;
   background: rgba(255, 249, 217, 0.12);
   border-radius: 8px;
-  top: 37px;
-  right: 32px;
   border: none;
   font-size: 17px;
   line-height: 26px;
@@ -964,6 +961,13 @@ main {
   width: 93px;
   text-align: center;
   cursor: pointer; }
+
+.player__header {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
 
 .player__controls {
   position: absolute;
