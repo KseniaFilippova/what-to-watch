@@ -7,7 +7,7 @@ import { WebAPIContext } from '../../context/web-api-context';
 import { updateUser } from '../../actions/user-actions';
 
 import User from '../../models/user';
-import { saveUserState } from '../../store/storage';
+import { saveUserState } from '../../store/local-storage';
 
 interface Props {
   updateUser: (user: User) => void;

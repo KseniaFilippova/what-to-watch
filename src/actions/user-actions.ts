@@ -2,7 +2,7 @@ import makeMovie from '../utils/make-movie';
 
 import Movie from '../models/movie';
 import User from '../models/user';
-import WebApiMovie from '../models/web-api-movie';
+import WebApiMovie from '../web-api/web-api-movie';
 
 const updateUser = (user: User) => {
   return {

@@ -3,7 +3,7 @@ import React from 'react';
 interface Props {
   text: string;
   svgLink: string;
-  onClick?: any;
+  onClick?: () => void;
 }
 
 const CardButton = (props: Props) => {

@@ -12,7 +12,7 @@ import { moviesLoaded } from '../../actions/data-actions';
 import { WebAPIContext } from '../../context/web-api-context';
 
 import Movie from '../../models/movie';
-import WebApiMovie from '../../models/web-api-movie';
+import WebApiMovie from '../../web-api/web-api-movie';
 
 interface Props {
   moviesLoaded: (

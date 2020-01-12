@@ -1,5 +1,5 @@
 import Movie from '../models/movie';
-import WebApiMovie from '../models/web-api-movie';
+import WebApiMovie from '../web-api/web-api-movie';
 
 const makeMovie = (webApiMovie: WebApiMovie): Movie => {
   return {

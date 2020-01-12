@@ -29,6 +29,10 @@ const CardsPreviewsList = (props: Props) => {
     setMoviesToShow([...moviesToShow, ...addedMovies]);
   };
 
+  if (!movies.length) {
+    return null;
+  }
+
   return (
     <Fragment>
       <div className='catalog__movies-list'>

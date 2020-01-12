@@ -1,5 +1,5 @@
 import { createStore } from 'redux';
-import { loadUserState } from './storage';
+import { loadUserState } from './local-storage';
 
 import reducer from '../reducers/index';
 

@@ -12,8 +12,8 @@ import { WebAPIContext } from '../../context/web-api-context';
 
 import Movie from '../../models/movie';
 import User from '../../models/user';
-import WebApiMovie from '../../models/web-api-movie';
 import { Store } from '../../store/store';
+import WebApiMovie from '../../web-api/web-api-movie';
 
 import {
   promoMovieLoaded,

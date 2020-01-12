@@ -10,8 +10,8 @@ import { favoriteMoviesLoaded } from '../actions/user-actions';
 import { WebAPIContext } from '../context/web-api-context';
 
 import Movie from '../models/movie';
-import WebApiMovie from '../models/web-api-movie';
 import { Store } from '../store/store';
+import WebApiMovie from '../web-api/web-api-movie';
 
 import { getFavoriteMovies } from '../reducers/user-reducer/selectors';
 

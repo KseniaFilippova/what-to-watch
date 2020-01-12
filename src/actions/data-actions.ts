@@ -1,8 +1,8 @@
 import makeMovie from '../utils/make-movie';
 
 import Movie from '../models/movie';
-import WebApiMovie from '../models/web-api-movie';
 import store from '../store/store';
+import WebApiMovie from '../web-api/web-api-movie';
 
 const moviesLoaded = (movies: WebApiMovie[]) => {
   const payload: Movie[] = movies.map((movie: WebApiMovie) => makeMovie(movie));
