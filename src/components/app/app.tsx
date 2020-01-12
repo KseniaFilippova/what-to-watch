@@ -26,9 +26,9 @@ interface Props {
 const App = (props: Props) => {
   const { moviesLoaded } = props;
 
-  const webApi = useContext(WebAPIContext);
+  const webApiClient = useContext(WebAPIContext);
   useEffect(() => {
-    webApi.getMovies().then((movies: WebApiMovie[]) => {
+    webApiClient.getMovies().then((movies: WebApiMovie[]) => {
       moviesLoaded(movies);
     });
   }, []);

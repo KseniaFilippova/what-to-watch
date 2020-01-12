@@ -1,7 +1,7 @@
 import React from 'react';
-import WebAPI from '../web-api/web-api';
+import WebApiClient from '../web-api/web-api-client';
 
-const webAPI = new WebAPI();
+const webAPI = new WebApiClient();
 const WebAPIContext = React.createContext(webAPI);
 
 export { webAPI, WebAPIContext };

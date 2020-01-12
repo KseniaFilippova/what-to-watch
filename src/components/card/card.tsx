@@ -45,9 +45,9 @@ const Card = (props: Props) => {
     promoMovieLoaded,
   } = props;
 
-  const webApi = useContext(WebAPIContext);
+  const webApiClient = useContext(WebAPIContext);
   useEffect(() => {
-    webApi.getPromo().then((promoMovie) => {
+    webApiClient.getPromo().then((promoMovie) => {
       promoMovieLoaded(promoMovie);
     });
   }, []);
@@ -59,7 +59,7 @@ const Card = (props: Props) => {
 
   const onInListButtonClick = () => {
     const status = movie.isFavorite ? 0 : 1;
-    webApi.setFavouriteStatus(movie.id, status).then((updatedMovie) => {
+    webApiClient.setFavouriteStatus(movie.id, status).then((updatedMovie) => {
       updatePromoMovie(updatedMovie);
       updateMovie(updatedMovie);
     });
@@ -77,13 +77,18 @@ const Card = (props: Props) => {
 
       <div className='movie-card__wrap'>
         <div className='movie-card__info'>
-          <CardPoster src={movie.posterImage} name={movie.name} />
+          <CardPoster
+            src={movie.posterImage}
+            name={movie.name}
+            link={`movie-${movie.id}`}
+          />
 
           <div className='movie-card__desc'>
             <CardDescription
               name={movie.name}
               genre={movie.genre}
               year={movie.released}
+              link={`movie-${movie.id}`}
             />
 
             <div className='movie-card__buttons'>

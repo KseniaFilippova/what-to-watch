@@ -5,7 +5,7 @@ interface UserData {
   password: string;
 }
 
-export default class WebAPI {
+export default class WebApiClient {
   private readonly api: AxiosInstance;
   private readonly API_TIMEOUT = 5000;
   private readonly API_BASE = 'https://htmlacademy-react-2.appspot.com/wtw';

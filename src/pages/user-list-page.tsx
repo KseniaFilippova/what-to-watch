@@ -28,10 +28,10 @@ interface Props {
 const UserListPage = (props: Props) => {
   const { favoriteMovies, favoriteMoviesLoaded } = props;
 
-  const webApi = useContext(WebAPIContext);
+  const webApiClient = useContext(WebAPIContext);
 
   useEffect(() => {
-    webApi.getFavoriteMovies().then((movies: WebApiMovie[]) => {
+    webApiClient.getFavoriteMovies().then((movies: WebApiMovie[]) => {
       favoriteMoviesLoaded(movies);
     });
   }, []);

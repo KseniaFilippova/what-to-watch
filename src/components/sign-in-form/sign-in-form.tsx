@@ -23,7 +23,7 @@ const SignInForm = (props: Props) => {
   const history = useHistory();
   const location = useLocation();
 
-  const webApi = useContext(WebAPIContext);
+  const webApiClient = useContext(WebAPIContext);
 
   const onFormSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -33,7 +33,7 @@ const SignInForm = (props: Props) => {
       password,
     };
 
-    webApi
+    webApiClient
       .authorize(formData)
       .then(
         (res: {

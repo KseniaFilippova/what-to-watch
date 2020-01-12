@@ -32,10 +32,10 @@ const FullCard = (props: Props) => {
     history.push(`play-movie-${movie.id}`);
   };
 
-  const webApi = useContext(WebAPIContext);
+  const webApiClient = useContext(WebAPIContext);
   const onInListButtonClick = () => {
     const status = movie.isFavorite ? 0 : 1;
-    webApi.setFavouriteStatus(movie.id, status).then((updatedMovie) => {
+    webApiClient.setFavouriteStatus(movie.id, status).then((updatedMovie) => {
       updateMovie(updatedMovie);
     });
   };
