@@ -13,6 +13,7 @@ const CardPreview = (props: Props) => {
 
   const onPreviewClick = (): void => {
     history.push(`movie-${id}`);
+    window.scrollTo(0, 0);
   };
 
   return (

@@ -1,5 +1,5 @@
 import { createStore } from 'redux';
-import { loadUserState } from './session';
+import { loadUserState } from './storage';
 
 import reducer from '../reducers/index';
 
@@ -11,15 +11,14 @@ const preloadedUser = loadUserState();
 interface Store {
   data: {
     movies: Movie[];
-    favoriteMovies: Movie[];
     promoMovie: Movie;
   };
-  user: { user: User };
+  user: { user: User; favoriteMovies: Movie[] };
 }
 
 const initialState: Store = {
-  data: { movies: [], favoriteMovies: [], promoMovie: null },
-  user: { user: preloadedUser },
+  data: { movies: [], promoMovie: null },
+  user: { user: preloadedUser, favoriteMovies: [] },
 };
 
 const store = createStore(reducer, initialState);

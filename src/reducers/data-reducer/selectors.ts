@@ -7,8 +7,6 @@ import createRandomInteger from '../../utils/create-random-integer';
 
 const getMovies = (state: Store): Movie[] => state.data.movies;
 
-const getFavoriteMovies = (state: Store): Movie[] => state.data.favoriteMovies;
-
 const getPromoMovie = (state: Store): Movie => state.data.promoMovie;
 
 const getMovieById = (state: Store, id: number): Movie =>
@@ -39,7 +37,6 @@ const getGenres = createSelector(getMovies, (movies) => {
 
 export {
   getMovies,
-  getFavoriteMovies,
   getPromoMovie,
   getMovieById,
   getRandomMovie,

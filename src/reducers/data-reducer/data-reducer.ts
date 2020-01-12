@@ -7,13 +7,11 @@ interface Action {
 
 interface State {
   movies: Movie[];
-  favoriteMovies: Movie[];
   promoMovie: Movie;
 }
 
 const initialState: State = {
   movies: [],
-  favoriteMovies: [],
   promoMovie: null,
 };
 
@@ -23,11 +21,6 @@ const reducer = (state = initialState, action: Action): State => {
       return {
         ...state,
         movies: action.payload,
-      };
-    case 'FAVORITE_MOVIES_LOADED':
-      return {
-        ...state,
-        favoriteMovies: action.payload,
       };
     case 'PROMO_MOVIE_LOADED':
       return {

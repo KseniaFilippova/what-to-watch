@@ -1,3 +1,4 @@
+import Movie from '../../models/movie';
 import User from '../../models/user';
 
 interface Action {
@@ -7,10 +8,12 @@ interface Action {
 
 interface State {
   user: User;
+  favoriteMovies: Movie[];
 }
 
 const initialState: State = {
   user: null,
+  favoriteMovies: [],
 };
 
 const reducer = (state = initialState, action: Action): State => {
@@ -19,6 +22,11 @@ const reducer = (state = initialState, action: Action): State => {
       return {
         ...state,
         user: action.payload,
+      };
+    case 'FAVORITE_MOVIES_LOADED':
+      return {
+        ...state,
+        favoriteMovies: action.payload,
       };
     default:
       return state;

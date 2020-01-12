@@ -10,7 +10,7 @@ import MovieInfo from '../movie-info/movie-info';
 
 import { WebAPIContext } from '../../context/web-api-context';
 
-import { updateMovies } from '../../actions/data-actions';
+import { updateMovie } from '../../actions/data-actions';
 import { getUser } from '../../reducers/user-reducer/selectors';
 
 import Movie from '../../models/movie';
@@ -20,24 +20,23 @@ import { Store } from '../../store/store';
 
 interface Props {
   movie: Movie;
-  updateMovies: (updatedMovie: WebApiMovie) => void;
+  updateMovie: (updatedMovie: WebApiMovie) => void;
   user: User;
 }
 
 const FullCard = (props: Props) => {
-  const { movie, updateMovies, user } = props;
-
-  const webApi = useContext(WebAPIContext);
+  const { movie, updateMovie, user } = props;
 
   const history = useHistory();
   const onPlayButtonClick = () => {
     history.push(`play-movie-${movie.id}`);
   };
 
+  const webApi = useContext(WebAPIContext);
   const onInListButtonClick = () => {
     const status = movie.isFavorite ? 0 : 1;
     webApi.setFavouriteStatus(movie.id, status).then((updatedMovie) => {
-      updateMovies(updatedMovie);
+      updateMovie(updatedMovie);
     });
   };
 
@@ -90,7 +89,7 @@ const mapStateToProps = (state: Store) => {
 };
 
 const mapDispatchToProps = {
-  updateMovies,
+  updateMovie,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FullCard);

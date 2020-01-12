@@ -2,7 +2,7 @@ import User from '../models/user';
 
 const loadUserState = () => {
   try {
-    const serializedState = sessionStorage.getItem('user');
+    const serializedState = localStorage.getItem('user');
 
     if (!serializedState) {
       return null;
@@ -16,7 +16,7 @@ const loadUserState = () => {
 const saveUserState = (user: User) => {
   try {
     const serializedState = JSON.stringify(user);
-    sessionStorage.setItem('user', serializedState);
+    localStorage.setItem('user', serializedState);
   } catch (error) {
     // ignore
   }

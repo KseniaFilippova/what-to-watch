@@ -17,7 +17,7 @@ import { Store } from '../../store/store';
 
 import {
   promoMovieLoaded,
-  updateMovies,
+  updateMovie,
   updatePromoMovie,
 } from '../../actions/data-actions';
 import { getPromoMovie } from '../../reducers/data-reducer/selectors';
@@ -26,7 +26,7 @@ import { getUser } from '../../reducers/user-reducer/selectors';
 interface Props {
   user: User;
   movie: Movie;
-  updateMovies: (updatedMovie: WebApiMovie) => void;
+  updateMovie: (updatedMovie: WebApiMovie) => void;
   updatePromoMovie: (updatedMovie: WebApiMovie) => void;
   promoMovieLoaded: (
     promoMovie: WebApiMovie,
@@ -40,12 +40,12 @@ const Card = (props: Props) => {
   const {
     user,
     movie,
-    updateMovies,
+    updateMovie,
     updatePromoMovie,
     promoMovieLoaded,
   } = props;
-  const webApi = useContext(WebAPIContext);
 
+  const webApi = useContext(WebAPIContext);
   useEffect(() => {
     webApi.getPromo().then((promoMovie) => {
       promoMovieLoaded(promoMovie);
@@ -61,7 +61,7 @@ const Card = (props: Props) => {
     const status = movie.isFavorite ? 0 : 1;
     webApi.setFavouriteStatus(movie.id, status).then((updatedMovie) => {
       updatePromoMovie(updatedMovie);
-      updateMovies(updatedMovie);
+      updateMovie(updatedMovie);
     });
   };
 
@@ -116,7 +116,7 @@ const mapStateToProps = (state: Store) => {
 
 const mapDispatchToProps = {
   promoMovieLoaded,
-  updateMovies,
+  updateMovie,
   updatePromoMovie,
 };
 

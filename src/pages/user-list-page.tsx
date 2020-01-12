@@ -5,7 +5,7 @@ import AppFooter from '../components/app-footer/app-footer';
 import AppHeader from '../components/app-header/app-header';
 import CardsPreviewsList from '../components/cards-previews-list/cards-previews-list';
 
-import { favoriteMoviesLoaded } from '../actions/data-actions';
+import { favoriteMoviesLoaded } from '../actions/user-actions';
 
 import { WebAPIContext } from '../context/web-api-context';
 
@@ -13,7 +13,7 @@ import Movie from '../models/movie';
 import WebApiMovie from '../models/web-api-movie';
 import { Store } from '../store/store';
 
-import { getFavoriteMovies } from '../reducers/data-reducer/selectors';
+import { getFavoriteMovies } from '../reducers/user-reducer/selectors';
 
 interface Props {
   favoriteMovies: Movie[];
