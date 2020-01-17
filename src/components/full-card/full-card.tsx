@@ -10,7 +10,7 @@ import MovieInfo from '../movie-info/movie-info';
 
 import { WebAPIContext } from '../../context/web-api-context';
 
-import { updateMovie } from '../../actions/data-actions';
+import { updateMovie } from '../../actions/movies-actions';
 import { getUser } from '../../reducers/user-reducer/selectors';
 
 import Movie from '../../models/movie';

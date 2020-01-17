@@ -8,29 +8,48 @@ import PlayerPage from '../../pages/player-page';
 import SignInPage from '../../pages/sign-in-page';
 import UserListPage from '../../pages/user-list-page';
 
-import { moviesLoaded } from '../../actions/data-actions';
+import {
+  moviesError,
+  moviesLoaded,
+  moviesRequested,
+} from '../../actions/movies-actions';
 import { WebAPIContext } from '../../context/web-api-context';
 
 import Movie from '../../models/movie';
 import WebApiMovie from '../../web-api/web-api-movie';
 
 interface Props {
+  moviesRequested: () => {
+    type: 'FETCH_MOVIES_REQUEST';
+  };
   moviesLoaded: (
     movies: WebApiMovie[],
   ) => {
-    type: 'MOVIES_LOADED';
+    type: 'FETCH_MOVIES_SUCCESS';
     payload: Movie[];
+  };
+  moviesError: (
+    error: Error,
+  ) => {
+    type: 'FETCH_MOVIES_FAILURE';
+    payload: string;
   };
 }
 
 const App = (props: Props) => {
-  const { moviesLoaded } = props;
+  const { moviesRequested, moviesLoaded, moviesError } = props;
 
   const webApiClient = useContext(WebAPIContext);
   useEffect(() => {
-    webApiClient.getMovies().then((movies: WebApiMovie[]) => {
-      moviesLoaded(movies);
-    });
+    moviesRequested();
+    webApiClient
+      .getMovies()
+      .then((movies: WebApiMovie[]) => {
+        moviesLoaded(movies);
+      })
+      .catch((error) => {
+        moviesError(error);
+      });
   }, []);
 
   return (
@@ -57,7 +76,9 @@ const App = (props: Props) => {
 };
 
 const mapDispatchToProps = {
+  moviesRequested,
   moviesLoaded,
+  moviesError,
 };
 
 export default connect(null, mapDispatchToProps)(App);

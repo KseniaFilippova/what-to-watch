@@ -6,7 +6,7 @@ import CardsPreviewsList from '../cards-previews-list/cards-previews-list';
 import Movie from '../../models/movie';
 import { Store } from '../../store/store';
 
-import { getMoviesByGenre } from '../../reducers/data-reducer/selectors';
+import { getMoviesByGenre } from '../../reducers/movies-reducer/selectors';
 
 interface Props {
   activeGenre: string;

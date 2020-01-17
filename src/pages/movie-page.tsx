@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import AppFooter from '../components/app-footer/app-footer';
 import CardsPreviewsList from '../components/cards-previews-list/cards-previews-list';
 import FullCard from '../components/full-card/full-card';
+import NoDataIndicator from '../components/no-data-indicator/no-data-indicator';
 
 import Movie from '../models/movie';
 import { Store } from '../store/store';
@@ -11,30 +12,36 @@ import { Store } from '../store/store';
 import {
   getMovieById,
   getRelatedMovies,
-} from '../reducers/data-reducer/selectors';
+} from '../reducers/movies-reducer/selectors';
 
 interface Props {
+  loading: boolean;
+  error: string;
   id: string;
   movie: Movie;
   relatedMovies: Movie[];
 }
 
 const MoviePage = (props: Props) => {
-  const { movie, relatedMovies } = props;
+  const { loading, error, movie, relatedMovies } = props;
 
-  if (!movie) {
-    return null;
-  }
+  const isDataLoaded: boolean = !loading && !Boolean(error);
 
   return (
     <Fragment>
-      <FullCard movie={movie} />
-      <div className='page-content'>
-        <section className='catalog catalog--like-this'>
-          <h2 className='catalog__title'>More like this</h2>
+      {isDataLoaded && <FullCard movie={movie} />}
 
-          <CardsPreviewsList movies={relatedMovies} />
-        </section>
+      <div className='page-content'>
+        {isDataLoaded && (
+          <section className='catalog catalog--like-this'>
+            <h2 className='catalog__title'>More like this</h2>
+            <CardsPreviewsList movies={relatedMovies} />
+          </section>
+        )}
+
+        {loading && <NoDataIndicator type='loading' isFullPage />}
+        {error && <NoDataIndicator type='error' error={error} isFullPage />}
+
         <AppFooter />
       </div>
     </Fragment>
@@ -44,6 +51,8 @@ const MoviePage = (props: Props) => {
 const mapStateToProps = (state: Store, ownProps: { id: string }) => {
   const movie = getMovieById(state, parseInt(ownProps.id));
   return {
+    loading: state.movies.loading,
+    error: state.movies.error,
     movie,
     relatedMovies: getRelatedMovies(state, movie),
   };

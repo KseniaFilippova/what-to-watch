@@ -1,17 +1,22 @@
 import React, { Fragment, useEffect, useState } from 'react';
+import { connect } from 'react-redux';
 
 import CardPreview from '../card-preview/card-preview';
+import NoDataIndicator from '../no-data-indicator/no-data-indicator';
 
 import Movie from '../../models/movie';
+import { Store } from '../../store/store';
 
 const COUNT_TO_SHOW = 8;
 
 interface Props {
   movies: Movie[];
+  loading: boolean;
+  error: string;
 }
 
 const CardsPreviewsList = (props: Props) => {
-  const { movies } = props;
+  const { movies, loading, error } = props;
 
   const [unshownMovies, setUnshownMovies] = useState([]);
   const [moviesToShow, setMoviesToShow] = useState([]);
@@ -29,8 +34,12 @@ const CardsPreviewsList = (props: Props) => {
     setMoviesToShow([...moviesToShow, ...addedMovies]);
   };
 
-  if (!movies.length) {
-    return null;
+  if (loading) {
+    return <NoDataIndicator type='loading' />;
+  }
+
+  if (error) {
+    return <NoDataIndicator type='error' error={error} />;
   }
 
   return (
@@ -62,4 +71,11 @@ const CardsPreviewsList = (props: Props) => {
   );
 };
 
-export default CardsPreviewsList;
+const mapStateToProps = (state: Store) => {
+  return {
+    loading: state.movies.loading,
+    error: state.movies.error,
+  };
+};
+
+export default connect(mapStateToProps)(CardsPreviewsList);

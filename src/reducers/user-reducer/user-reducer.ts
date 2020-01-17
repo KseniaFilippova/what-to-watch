@@ -1,22 +1,11 @@
-import Movie from '../../models/movie';
-import User from '../../models/user';
+import { Action, Store } from '../../store/store';
 
-interface Action {
-  type: string;
-  payload?: any;
-}
-
-interface State {
-  user: User;
-  favoriteMovies: Movie[];
-}
-
-const initialState: State = {
+const initialState: Store['user'] = {
   user: null,
   favoriteMovies: [],
 };
 
-const reducer = (state = initialState, action: Action): State => {
+const reducer = (state = initialState, action: Action): Store['user'] => {
   switch (action.type) {
     case 'UPDATE_USER':
       return {

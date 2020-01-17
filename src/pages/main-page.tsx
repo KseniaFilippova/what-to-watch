@@ -6,7 +6,7 @@ import Card from '../components/card/card';
 import FilteredCardsPreviewsList from '../components/filtered-cards-previews-list/filtered-cards-previews-list';
 import TabsList from '../components/tabs-list/tabs-list';
 
-import { getGenres } from '../reducers/data-reducer/selectors';
+import { getGenres } from '../reducers/movies-reducer/selectors';
 
 import { Store } from '../store/store';
 

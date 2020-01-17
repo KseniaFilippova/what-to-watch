@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import AppFooter from '../components/app-footer/app-footer';
 
-import { getMovieById } from '../reducers/data-reducer/selectors';
+import { getMovieById } from '../reducers/movies-reducer/selectors';
 
 import Movie from '../models/movie';
 import { Store } from '../store/store';
